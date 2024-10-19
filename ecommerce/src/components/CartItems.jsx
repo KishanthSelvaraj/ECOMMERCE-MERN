@@ -3,7 +3,7 @@ import { ShopContext } from "../Context/ShopContext";
 import { TbTrash } from "react-icons/tb";
 
 const CartItems = () => {
-  const {getTotalCartAmount, all_products, cartItems, removeFromCart } = useContext(ShopContext);
+  const { getTotalCartAmount, all_products, cartItems, removeFromCart } = useContext(ShopContext);
 
   return (
     <section className="max_padd_container pt-28">
@@ -21,6 +21,9 @@ const CartItems = () => {
         <tbody>
           {all_products.map((e) => {
             if (cartItems[e.id] > 0) {
+              // Replace the localhost URL with the production URL
+              const imageUrl = e.image.replace("http://localhost:3000", "https://ecommerce-mern-w5oy.onrender.com");
+
               return (
                 <tr
                   key={e.id}
@@ -28,7 +31,7 @@ const CartItems = () => {
                 >
                   <td className="flexCenter">
                     <img
-                      src={e.image}
+                      src={imageUrl} // Use the modified image URL
                       alt="prdctImg"
                       height={43}
                       width={43}
@@ -65,7 +68,7 @@ const CartItems = () => {
             </div>
             <hr />
             <div className="flexBetween py-4">
-              <h4 classname="medium-16">Shipping Fee:</h4>
+              <h4 className="medium-16">Shipping Fee:</h4>
               <h4 className="text-gray-30 font-semibold">Free</h4>
             </div>
             <hr />
