@@ -9,6 +9,13 @@ import { ShopContext } from "../Context/ShopContext";
 const ProductDisplay = (props) => {
   const { product } = props;
   const { addToCart } = useContext(ShopContext);
+  
+  // Define the base URL
+  const baseUrl = "https://ecommerce-mern-w5oy.onrender.com";
+
+  // Create the image URL
+  const productImageUrl = product.image.replace("http://localhost:3000", baseUrl);
+
   return (
     <section>
       <div className="flex flex-col gap-14 xl:flex-row xl:flex-1">
@@ -37,7 +44,7 @@ const ProductDisplay = (props) => {
             />
           </div>
           <div>
-            <img src={product.image} alt="" />
+            <img src={productImageUrl} alt="" />
           </div>
         </div>
         {/* right side */}
@@ -80,7 +87,7 @@ const ProductDisplay = (props) => {
                 Add to cart
               </button>
               <button className="btn_dark_rounded !rounded-none uppercase regular-14 tracking-widest">
-                Bye it now{" "}
+                Buy it now{" "}
               </button>
             </div>
             <p>
