@@ -34,7 +34,7 @@ const AddProduct = () => {
     formData.append("product", image);
 
     try {
-      const uploadResponse = await fetch("http://localhost:3000/upload", {
+      const uploadResponse = await fetch("https://ecommerce-mern-w5oy.onrender.com/upload", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -46,7 +46,7 @@ const AddProduct = () => {
       if (responseData.success) {
         product.image = responseData.image_url;
         console.log(product);
-        const addProductResponse = await fetch("http://localhost:3000/addproduct", {
+        const addProductResponse = await fetch("https://ecommerce-mern-w5oy.onrender.com/addproduct", {
           method: "POST",
           headers: {
             Accept: "application/json",
