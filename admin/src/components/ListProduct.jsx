@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { TbTrash } from "react-icons/tb";
+
 const ListProduct = () => {
   const [allproducts, setAllproducts] = useState([]);
 
@@ -7,12 +8,19 @@ const ListProduct = () => {
     await fetch("https://ecommerce-mern-w5oy.onrender.com/allproducts")
       .then((res) => res.json())
       .then((data) => {
-        setAllproducts(data);
+        // Update image URLs to replace localhost with the production URL
+        const updatedProducts = data.map((product) => ({
+          ...product,
+          image: product.image.replace("http://localhost:3000", "https://ecommerce-mern-w5oy.onrender.com"),
+        }));
+        setAllproducts(updatedProducts);
       });
   };
+
   useEffect(() => {
     fetchInfo();
   }, []);
+
   const remove_product = async (id) => {
     await fetch("https://ecommerce-mern-w5oy.onrender.com/removeproduct", {
       method: "POST",
@@ -22,7 +30,7 @@ const ListProduct = () => {
       },
       body: JSON.stringify({ id: id }),
     });
-    await fetchInfo()
+    await fetchInfo();
   };
 
   return (
