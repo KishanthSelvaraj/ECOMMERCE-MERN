@@ -9,37 +9,68 @@ const jwt = require("jsonwebtoken");
 const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
+const fs = require('fs'); // For handling file system checks
 
 app.use(express.json());
 app.use(cors());
+const allowedOrigins = ['https://ecommerce-mern-beta.vercel.app', 'https://another-allowed-origin.com','http://localhost:5173','http://localhost:5174'];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  optionsSuccessStatus: 200 
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); // Enable preflight
 
 // const mySecret = process.env.URI;
-mongoose.connect("mongodb+srv://ecommerceMern:kishanth21@cluster0.rdnh7tn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
+mongoose.connect("mongodb+srv://ecommerceMern:kishanth21@cluster0.rdnh7tn.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"), {
+  serverSelectionTimeoutMS: 20000 // Increase timeout to 20 seconds
+};
 
 app.get("/", (req, res) => {
   res.send("Express App is running");
 });
 
-//image storage engine
+
+// Ensure the upload directory exists in production
+const uploadDir = path.resolve(__dirname, 'upload/images');
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
+
+// Image storage engine configuration
 const storage = multer.diskStorage({
-  destination: "./upload/images",
+  destination: (req, file, cb) => {
+    cb(null, uploadDir);
+  },
   filename: (req, file, cb) => {
-    return cb(
-      null,
-      `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`
-    );
+    cb(null, `${file.fieldname}_${Date.now()}${path.extname(file.originalname)}`);
   },
 });
 
 const upload = multer({ storage: storage });
-// creating uplload endpoint for images
-app.use("/images", express.static("upload/images"));
+
+// Serve the uploaded images as static files
+app.use('/images', express.static(path.join(__dirname, 'upload/images')));
+
+
+// Upload image endpoint
 app.post("/upload", upload.single("product"), (req, res) => {
+  console.log(req.file); // Log the uploaded file details
+  const imageUrl = `https://ecommerce-mern-w5oy.onrender.com/images/${req.file.filename}`;
   res.json({
     success: 1,
-    image_url: `http://localhost:${port}/images/${req.file.filename}`,
+    image_url: imageUrl,
   });
 });
+
 
 // Schema for creating products
 const Product = mongoose.model("Product", {
@@ -208,8 +239,8 @@ app.get("/newcollections", async (req, res) => {
 
 //creating endpoint for popular products
 app.get("/popularproducts", async (req, res) => {
-  let products = await Product.find({ category: "men" });
-  let popularproducts = products.slice(0, 4);
+  let products = await Product.find({});
+  let popularproducts = products.slice(1).slice(-4);
   console.log("popular products");
   res.send(popularproducts);
 });
