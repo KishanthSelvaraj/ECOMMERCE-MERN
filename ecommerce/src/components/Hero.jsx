@@ -9,7 +9,7 @@ const Hero = () => {
         <h1 className="h1 capitalize max-w-[37rem] text-white">
           <span className="text-[#6af771]">Sustainable</span> Spring 2024
         </h1>
-        <p className="text-white regular-16 mt-3 lg:mt-6 max-w-[33rem] ">
+        <p className="text-white regular-20 mt-3 lg:mt-6 max-w-[36rem] ">
           Spring is in the air, and it's the perfect time to refresh your home
           and lifestyle with eco-friendly solutions. At <span className="text-gray-500">Sustainable.co.za</span> we
           are celebrating the season of renewal with incredible promotions that
@@ -28,7 +28,7 @@ const Hero = () => {
             <span className="regular-16 sm:regular-20"> Excellent Reviews</span>
           </div>
         </div> */}
-        <div className="max-xs:flex-col lg:flex gap-2 hidden mt-4">
+        <div className="max-xs:flex-col lg:flex gap-2 hidden mt-4 lg:mt-10">
           {/* <NavLink className={"btn_white_rounded flexCenter "}>Shop now</NavLink> */}
           <NavLink
             className={
