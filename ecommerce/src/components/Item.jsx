@@ -1,7 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
+
 const Item = ({ id, name, image, old_price, new_price }) => {
+  // Define the base URL for images
+  const baseUrl = "https://ecommerce-mern-w5oy.onrender.com/images/";
+
+  // Replace localhost URL with the production URL if necessary
+  const imageUrl = image.startsWith("http://localhost:3000/images/")
+    ? image.replace("http://localhost:3000/images/", baseUrl)
+    : image;
+
   return (
     <div className="rounded-xl overflow-hidden shadow-lg">
       <div className="relative flexCenter group overflow-hidden transition-all duration-100">
@@ -13,7 +22,7 @@ const Item = ({ id, name, image, old_price, new_price }) => {
         </Link>
         <img
           onClick={window.scrollTo(0, 0)}
-          src={image}
+          src={imageUrl} // Use the updated imageUrl
           alt="productImage"
           className="w-full block object-cover group-hover:scale-110 transition-all duration-1000"
         />
@@ -30,4 +39,5 @@ const Item = ({ id, name, image, old_price, new_price }) => {
     </div>
   );
 };
+
 export default Item;

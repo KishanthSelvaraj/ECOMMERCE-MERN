@@ -15,7 +15,7 @@ const Login = () => {
   const login = async () => {
     try {
       console.log("login", formData);
-      const response = await fetch("http://localhost:3000/login", {
+      const response = await fetch("https://ecommerce-mern-w5oy.onrender.com/login", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -42,7 +42,7 @@ const Login = () => {
   const signup = async () => {
     try {
       console.log("signup", formData);
-      const response = await fetch("http://localhost:3000/signup", {
+      const response = await fetch("https://ecommerce-mern-w5oy.onrender.com/signup", {
         method: "POST",
         headers: {
           Accept: "application/json",

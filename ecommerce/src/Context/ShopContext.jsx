@@ -14,9 +14,9 @@ const ShopContextProvider = (props) => {
  const [all_products, setAll_products] = useState([]);
 
 useEffect(()=>{
-  fetch("http://localhost:3000/allproducts").then((res)=>res.json()).then((data)=>setAll_products(data))
+  fetch("https://ecommerce-mern-w5oy.onrender.com/allproducts").then((res)=>res.json()).then((data)=>setAll_products(data))
   if (localStorage.getItem("auth-token")) {
-    fetch("http://localhost:3000/getcart", {
+    fetch("https://ecommerce-mern-w5oy.onrender.com/getcart", {
       method: "POST",
       headers: {
         Accept: "application/form-data",
@@ -32,7 +32,7 @@ useEffect(()=>{
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
     // console.log(cartItems);
     if (localStorage.getItem("auth-token")) {
-      fetch("http://localhost:3000/addtocart", {
+      fetch("https://ecommerce-mern-w5oy.onrender.com/addtocart", {
         method: "POST",
         headers: {
           Accept: "application/form-data",
@@ -47,7 +47,7 @@ useEffect(()=>{
   const removeFromCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
     if (localStorage.getItem("auth-token")) {
-      fetch("http://localhost:3000/removefromcart", {
+      fetch("https://ecommerce-mern-w5oy.onrender.com/removefromcart", {
         method: "POST",
         headers: {
           Accept: "application/form-data",
@@ -58,7 +58,6 @@ useEffect(()=>{
       }).then((res)=>res.json()).then((data)=>console.log(data))
     }
   };
-
   const getTotalCartAmount = () => {
     let totalAmount = 0;
     for (const item in cartItems) {
@@ -66,12 +65,13 @@ useEffect(()=>{
         let itemInfo = all_products.find(
           (product) => product.id === Number(item)
         );
-        totalAmount += itemInfo.new_price * cartItems[item];
+        // If itemInfo is null or undefined, it simply skips adding to totalAmount
+        totalAmount += itemInfo ? itemInfo.new_price * cartItems[item] : 0;
       }
     }
     return totalAmount;
   };
-
+  
   const getTotalCartItem = () => {
     let totalItem = 0;
     for (const item in cartItems) {
