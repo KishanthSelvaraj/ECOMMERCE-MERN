@@ -232,7 +232,7 @@ app.post("/login", async (req, res) => {
 //creating endpoint for latestproducts
 app.get("/newcollections", async (req, res) => {
   let products = await Product.find({});
-  let newcollection = products.slice(1).slice(-8);
+  let newcollection = products.slice(1).slice(-4);
   console.log("new colleciton");
   res.send(newcollection);
 });
