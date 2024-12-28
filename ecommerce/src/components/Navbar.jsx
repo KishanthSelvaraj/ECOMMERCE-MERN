@@ -14,30 +14,30 @@ const Navbar = ({ containerStyles }) => {
         </div>
       </NavLink>
       <NavLink
-        to={"/"}
+        to={"/mens"}
         className={({ isActive }) => (isActive ? "" : "")}
       >
         <div className="flexCenter gap-x-1">
           <MdCategory />
-          Solar 
+          Mens 
         </div>
       </NavLink>
       <NavLink
-        to={"/"}
+        to={"/womens"}
         className={({ isActive }) => (isActive ? "" : "")}
       >
         <div className="flexCenter gap-x-1">
           <MdShop2 />
-       Water 
+       Womens 
         </div>
       </NavLink>
       <NavLink
-        to={"/"}
+        to={"/kids"}
         className={({ isActive }) => (isActive ? "" : "")}
       >
         <div className="flexCenter gap-x-1">
           <MdContacts />
-         Lighting 
+         Kids 
         </div>
       </NavLink>
     </nav>
