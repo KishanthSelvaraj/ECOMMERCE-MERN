@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
-import product_rt_1 from "../assets/demo_img_1.webp";
-import product_rt_2 from "../assets/demo_img_2.webp";
-import product_rt_3 from "../assets/demo_img_3.webp";
-import product_rt_4 from "../assets/demo_img_4.webp";
+import product_rt_1 from "../assets/product_rt_1.png";
+import product_rt_2 from "../assets/product_rt_2.png";
+import product_rt_3 from "../assets/product_rt_3.png";
+import product_rt_4 from "../assets/product_rt_4.png";
 import { MdStar } from "react-icons/md";
 import { ShopContext } from "../Context/ShopContext";
 
