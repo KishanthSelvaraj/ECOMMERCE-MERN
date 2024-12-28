@@ -240,7 +240,7 @@ app.get("/newcollections", async (req, res) => {
 //creating endpoint for popular products
 app.get("/popularproducts", async (req, res) => {
   let products = await Product.find({});
-  let popularproducts = products.slice(1).slice(-4);
+  let popularproducts = products.slice(1).slice(-8);
   console.log("popular products");
   res.send(popularproducts);
 });
