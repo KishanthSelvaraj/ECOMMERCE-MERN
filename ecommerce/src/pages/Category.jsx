@@ -32,9 +32,9 @@ const Category = ({ category, banner }) => {
             <h5>
               <span className="font-bold">Showing 1-12</span> out of 36 products
             </h5>
-            <div className="flexBetween max-sm:p-4 gap-x-4 px-8 py-3 rounded-5xl ring-1 ring-slate-900/15">
+{/*             <div className="flexBetween max-sm:p-4 gap-x-4 px-8 py-3 rounded-5xl ring-1 ring-slate-900/15">
               Sort by <MdOutlineKeyboardArrowDown />
-            </div>
+            </div> */}
           </div>
           {/* container */}
           <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-6">
